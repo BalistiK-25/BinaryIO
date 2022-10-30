@@ -1,17 +1,19 @@
-class MCP:
-    def __init__(self, ports=0):
-        self.ports = ports
+class Binary:
+    def __init__(self, byte=0):
+        self.byte = byte
 
     @staticmethod
-    def __port_to_binary(port):
+    def __bit_position_to_binary(port):
         return 1 << port
 
-    def get_state(self, port):
-        return (self.ports & MCP.__port_to_binary(port)) >> port
+    def get_state(self, bit):
+        return (self.byte & Binary.__bit_position_to_binary(bit)) >> bit
 
-    def set_state(self, state, port):
-        self.ports = self.ports | MCP.__port_to_binary(port) if state == 1 else self.ports & ~MCP.__port_to_binary(port)
+    def set_state(self, state, bit):
+        self.byte = self.byte | Binary.__bit_position_to_binary(bit) \
+            if state == 1 \
+            else self.byte & ~Binary.__bit_position_to_binary(bit)
 
-    def set_state_of_ports(self, state, port_array):
-        for p in port_array:
+    def set_state_of_bits(self, state, bit_positions):
+        for p in bit_positions:
             self.set_state(state, p)
