@@ -10,9 +10,7 @@ class Binary:
         return (self.byte & Binary.__bit_position_to_binary(bit)) >> bit
 
     def set_state(self, state, bit):
-        self.byte = self.byte | Binary.__bit_position_to_binary(bit) \
-            if state == 1 \
-            else self.byte & ~Binary.__bit_position_to_binary(bit)
+        self.byte = self.byte | Binary.__bit_position_to_binary(bit) if state == 1 else self.byte & ~Binary.__bit_position_to_binary(bit)
 
     def set_state_of_bits(self, state, bit_positions):
         for p in bit_positions:
