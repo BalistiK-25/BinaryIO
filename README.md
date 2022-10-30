@@ -3,44 +3,36 @@
 This is a little helper tool to manipulate an integer number with bitwise manipulation.
 The following lists the function provided:
 
-    Acess the number stored by the tool.
-    binaryIO.ports
-    
-    example:
-    print(bin(binaryIO.ports))
+Create a new binaryIO object, optionally with a pre-specified byte
 
-    Sets the state (0-1) of a port (bit) of a byte.
-    binaryIO.set_state(state, port)
+    binIO1 = binaryIO.Binary()
+    binIO2 = binaryIO.Binary(0b10011011)
     
-    example:
-    binaryIO.set_state(1, 2)
+Access the byte stored inside the object:
+
+    binIO.byte
+
+Change a specific bit of the byte (state is either 0 or 1; if invalid state, defaults to 0)
+
+    binIO.set_state(1, 0) #set state 1 of bit 0 = 0b1
+    binIO.set_state(1, 3) #set state 1 of bit 3 = 0b1001
+    binIO.set_state(0, 3) #set state 0 of bit 3 = 0b1
     
-    results in:
-    0b10
     
-    # Sets the state (0-1) of multiple ports (bits) of a byte with a single call.
-    binaryIO.set_state_of_ports(state, ports)
+Change a batch of bits of a byte (state is either 0 or 1; if invalid state, defaults to 0)
+
+    binIO.set_state_of_bits(1, [2, 3, 7]) #set state 1 of bits 2, 3 and 7    = 0b10001100
+    binIO.set_state_of_bits(1, [5, 6]) #set state 1 of bits 5 and 6          = 0b11101100
+    binIO.set_state_of_bits(0, [2, 6, 7]) #set state 0 of bits 2, 6 and 7    = 0b101000
     
-    example:
-    binaryIO.set_state_of_ports(1, [2, 3, 5, 8])
     
-    results in:
-    0b10010110
+Returns the state of a specific bit
+
+    binIO = binaryIO.Binary(0b1001)
+    binIO.get_state(3) #get state of bit 3 = 1
+    binIO.get_state(2) #get state of bit 2 = 0
     
-    # Returns the state of a specific port
-    binaryIO.get_state(port)
-    
-    example:
-    binaryIO.ports = 0b10010110
-    binaryIO.get_state(3)
-    
-    results in:
-    1
-    
-    binaryIO.get_state(4)
-    
-    results in:
-    0
+
 
 
 
